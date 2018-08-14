@@ -1,0 +1,15 @@
+{
+  "name": "package-animation-demo",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "parcel index.html"
+  },
+  "dependencies": {
+    "spriteling": "^1.1.0"
+  },
+  "devDependencies": {
+    "parcel-bundler": "^1.9.7"
+  }
+}

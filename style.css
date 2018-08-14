@@ -1,0 +1,30 @@
+html, body {
+  height: 100%;
+}
+body {
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+  --canvas-width: 1920px;
+}
+
+.canvas {
+  width: var(--canvas-width);
+  height: 1080px;
+  position: relative;
+  overflow: hidden;
+}
+
+.bg {
+  background: url('./assets/bg.png');
+  width: calc(var(--canvas-width) * 2);
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 0;
+}
+
+.package-guy {
+  margin: 0 auto;
+}
