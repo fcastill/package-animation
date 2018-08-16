@@ -5,6 +5,7 @@ body {
   font-family: sans-serif;
   margin: 0;
   padding: 0;
+  background-color: #101224;
   --canvas-width: 1920px;
 }
 
@@ -13,18 +14,31 @@ body {
   height: 1080px;
   position: relative;
   overflow: hidden;
+  margin: 0 auto;
 }
 
 .bg {
   background: url('./assets/bg.png');
+  background-repeat: repeat-x;
   width: calc(var(--canvas-width) * 2);
   height: 100%;
   position: absolute;
   left: 0;
   top: 0;
   z-index: 0;
+
+  animation-duration: 60s;
+  animation-delay: 0;
+  animation-name: bg-slide;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
-.package-guy {
-  margin: 0 auto;
+@keyframes bg-slide {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
 }
