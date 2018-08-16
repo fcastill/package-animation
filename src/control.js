@@ -14,30 +14,32 @@ export class AnimationController {
 
   walk() {
     this.bgAnimation.play();
-    this._switchTo(this.stateNames.walking);
+    this.sprite.showSprite(2);
+    this.sprite.play(this.stateNames.walking, {
+      run: -1,
+    });
   }
 
   wait() {
     this.bgAnimation.pause();
-    this.sprite.stop();
-    this.sprite.goTo(1);
-    setTimeout(() => this._switchTo(this.stateNames.waiting), 1);
-    // setTimeout
-    // this._switchTo(this.stateNames.waiting);
+    this.sprite.play(this.stateNames.waiting, {
+      run: -1,
+    });
   }
 
   fall() {
     this.bgAnimation.pause();
-    this._switchTo(this.stateNames.falling);
+    this.sprite.play(this.stateNames.falling, {
+      run: 1,
+      onStop: () => this.respawn(),
+    });
   }
 
-  _switchTo(stateName) {
-    this.sprite.play(stateName, {
-      run: -1,
+  respawn() {
+    this.sprite.play(this.stateNames.respawn, {
+      run: 1,
+      onStop: () => this.wait(),
     });
-    // setTimeout(() => this.sprite.play(stateName, {
-    //   run: -1,
-    // }));
   }
   
 }

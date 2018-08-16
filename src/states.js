@@ -2,6 +2,7 @@ export const STATES_NAMES = {
   walking: 'walking',
   falling: 'falling',
   waiting: 'waiting',
+  respawn: 'respawn',
 };
 
 export const FRAMES = [
@@ -19,14 +20,26 @@ export const FRAMES = [
       { sprite: 5, delay: 150 },
       { sprite: 6, delay: 150 },
       { sprite: 7, delay: 150 },
-      { sprite: 8, delay: 250 },
-      { sprite: 9, delay: 400 },
-      { sprite: 8, delay: 500 },
-      { sprite: 9, delay: 400 },
-      { sprite: 8, delay: 500 },
-      { sprite: 9, delay: 400 },
-      { sprite: 8, delay: 500 },
-      { sprite: 9, delay: 400 },
+      { sprite: 8, delay: 350 },
+      { sprite: 9, delay: 300 },
+      { sprite: 16, delay: 200 },
+      { sprite: 9, delay: 200 },
+      { sprite: 16, delay: 150 },
+      { sprite: 9, delay: 100 },
+      { sprite: 16, delay: 100 },
+      { sprite: 9, delay: 50 },
+      { sprite: 16, delay: 300 },
+    ]
+  ],
+  [
+    STATES_NAMES.respawn,
+    [
+      { sprite: 1, delay: 200 },
+      { sprite: 16, delay: 150 },
+      { sprite: 1, delay: 100 },
+      { sprite: 16, delay: 100 },
+      { sprite: 1, delay: 50 },
+      { sprite: 16, delay: 300 },
     ]
   ],
   [
