@@ -23,7 +23,7 @@ function createSpriteAnimator() {
   const sprite = new Spriteling({
     url: spritesUrl,
     cols: 4,
-    rows: 4,
+    rows: 5,
   }, `#${CHARACTER_CONTAINER_ID}`, true);
   FRAMES.forEach(([name, frames]) => sprite.addScript(name, frames));
   return sprite;

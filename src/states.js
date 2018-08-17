@@ -22,13 +22,13 @@ export const FRAMES = [
       { sprite: 7, delay: 150 },
       { sprite: 8, delay: 350 },
       { sprite: 9, delay: 300 },
-      { sprite: 16, delay: 200 },
+      { sprite: 1, delay: 200 },
       { sprite: 9, delay: 200 },
-      { sprite: 16, delay: 150 },
+      { sprite: 1, delay: 150 },
       { sprite: 9, delay: 100 },
-      { sprite: 16, delay: 100 },
+      { sprite: 1, delay: 100 },
       { sprite: 9, delay: 50 },
-      { sprite: 16, delay: 300 },
+      { sprite: 1, delay: 300 },
     ]
   ],
   [
@@ -46,8 +46,15 @@ export const FRAMES = [
     STATES_NAMES.waiting,
     [
       // standby
-      { sprite: 2, delay: 1 },
-      { sprite: 1, delay: 2400 },
+      { sprite: 16, delay: 500 },
+      { sprite: 19, delay: 100 },
+      { sprite: 16, delay: 500 },
+      { sprite: 19, delay: 100 },
+      { sprite: 16, delay: 500 },
+      { sprite: 19, delay: 100 },
+      { sprite: 17, delay: 500 },
+      { sprite: 18, delay: 100 },
+      { sprite: 17, delay: 500 },
       // tapping
       { sprite: 10, delay: 250 },
       { sprite: 11, delay: 250 },
