@@ -1,26 +1,32 @@
 import Vue from 'vue';
-import { createAnimationControl } from './index';
+import { createAnimationControl, STATES_NAMES } from './animation';
 
-const app = new Vue({
+new Vue({
   el: '#app',
   data: {
     ws: null,
     host: 'localhost:8090',
     connStatus: 'offline',
     lastMessage: null,
+    currentAnimationState: null,
     settings: {
       isOpen: true,
       newHost: null,
     },
     animation: null,
+    dropCount: 0,
   },
   mounted() {
     this.settings.newHost = this.host;
-    // characterEl = document.getElementById('character');
-    // sceneEl = document.getElementById('scene');
-    this.animation = createAnimationControl((state) => console.log('s:', state));
+    console.log('mounted', this.dropCount, this.host);
+    this.animation = createAnimationControl((state) => {
+      this.currentAnimationState = state;
+      if (state === STATES_NAMES.falling) {
+       this.dropCount = this.dropCount + 1; 
+      }
+    });
     global.packageGuy = this.animation;
-    this.animation.wait();
+    this.animation.standby();
   },
   computed: {
     status() {
@@ -42,8 +48,10 @@ const app = new Vue({
         name: 'unknown 🤔'
       };
     },
-    isWalking() {
-      return this.status && this.status.name == 'walking';
+    paddedDropCount() {
+      const count = this.dropCount;
+      console.log('dddd', count < 10 ? '0' + count : count);
+      return count < 10 ? '0' + count : count;
     },
     connectionClass() {
       return {
@@ -56,12 +64,11 @@ const app = new Vue({
   watch: {
     status(status, oldStatus) {
       console.log('statusChanged', status, oldStatus);
-      if (!status || !oldStatus || status.name === oldStatus.name) {
+      if (!status || !oldStatus || status.name === oldStatus.name || this.currentAnimationState === STATES_NAMES.falling) {
         return;
       }
       switch(status.name) {
         case 'sitting':
-        case 'waiting':
           this.animation.wait();
         break;
         case 'walking':
@@ -69,6 +76,9 @@ const app = new Vue({
         break;
         case 'dropped':
           this.animation.fall();
+        break;
+        default:
+          this.animation.standby();
         break;
       }
     }

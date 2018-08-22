@@ -30,6 +30,14 @@ export class AnimationController {
     });
   }
 
+  standby() {
+    this.bgAnimation.pause();
+    this.sprite.play(this.stateNames.standby, {
+      run: -1,
+      onPlay: () => this._change(this.stateNames.standby)
+    });
+  }
+
   fall() {
     this.bgAnimation.pause();
     this.sprite.play(this.stateNames.falling, {

@@ -1,6 +1,7 @@
 export const STATES_NAMES = {
   walking: 'walking',
   falling: 'falling',
+  standby: 'standby',
   waiting: 'waiting',
   respawn: 'respawn',
 };
@@ -45,13 +46,6 @@ export const FRAMES = [
   [
     STATES_NAMES.waiting,
     [
-      // standby
-      { sprite: 16, delay: 600 },
-      { sprite: 19, delay: 200 },
-      { sprite: 16, delay: 500 },
-      { sprite: 19, delay: 150 },
-      { sprite: 16, delay: 600 },
-      { sprite: 19, delay: 200 },
       { sprite: 17, delay: 600 },
       { sprite: 18, delay: 200 },
       { sprite: 17, delay: 500 },
@@ -74,5 +68,17 @@ export const FRAMES = [
       // mad
       { sprite: 12, delay: 150 },
     ]
-  ]
+  ],
+  [
+    STATES_NAMES.standby,
+    [
+      // standby
+      { sprite: 16, delay: 800 },
+      { sprite: 19, delay: 120 },
+      { sprite: 16, delay: 1000 },
+      { sprite: 19, delay: 200 },
+      { sprite: 16, delay: 700 },
+      { sprite: 19, delay: 200 },
+    ]
+  ],
 ];

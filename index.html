@@ -7,15 +7,25 @@
   <link rel="stylesheet" href="node_modules/bulma/css/bulma.min.css">
 </head>
 <body>
-  <div>
+  <!-- <div>
     <button id="btn-wait">Wait</button>
     <button id="btn-walk">Walk</button>
     <button id="btn-fall">Fall</button>
-  </div>
+  </div> -->
   <div id="app">
     <div class="config-btn tags has-addons" v-on:click="openSettings">
       <span class="tag" v-bind:class="connectionClass"> {{ connStatus }}</span>
       <a class="button is-small is-light tag">⚙</a>
+    </div>
+    <div class="canvas">
+      <div id="bg" class="bg"></div>
+      <div class="dropcount">
+        <div class="dropcount__wrapper">
+          <div class="dropcount__text">Dropcount</div>
+          <div id="counter" class="dropcount__numbers">{{ paddedDropCount }}</div>
+        </div>
+      </div>
+      <div id="package-guy" class="package-guy"></div>
     </div>
     <div class="modal" v-bind:class="{ 'is-active': settings.isOpen }">
       <div class="modal-background"></div>
@@ -46,16 +56,6 @@
         </div>
       </div>
     </div>
-  </div>
-  <div class="canvas">
-    <div id="bg" class="bg"></div>
-    <div class="dropcount">
-      <div class="dropcount__wrapper">
-        <div class="dropcount__text">Dropcount</div>
-        <div id="counter" class="dropcount__numbers">00</div>
-      </div>
-    </div>
-    <div id="package-guy" class="package-guy"></div>
   </div>
   <script src="./src/app.js"></script>
 </body>

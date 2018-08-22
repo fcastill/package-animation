@@ -1,5 +1,5 @@
 const wss = require('../ws/server');
-const messages = require('./responses');
+const messages = require('./mock-responses');
 
 const customInterval = process.argv[1] && +process.argv[1];
 const interval = customInterval || 2000;

@@ -1,12 +1,14 @@
 import Spriteling from 'spriteling';
 
-import spritesUrl from '../assets/sprites.png';
+import spritesUrl from '../../assets/sprites.png';
 import { FRAMES, STATES_NAMES } from './states';
 import { AnimationController } from './control';
 
 const CHARACTER_CONTAINER_ID = 'package-guy';
 const BG_CONTAINER_ID = 'bg';
 const COUNTER_ID = 'counter';
+
+export { STATES_NAMES };
 
 export function demo() {
   const counter = createCounter();
