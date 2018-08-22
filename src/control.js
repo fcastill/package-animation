@@ -6,10 +6,11 @@ export class AnimationController {
    * @param {*} bg 
    * @param {*} states 
    */
-  constructor(sprite, bgAnimation, stateNames) {
+  constructor(sprite, bgAnimation, stateNames, onStateChange) {
     this.sprite = sprite;
     this.bgAnimation = bgAnimation;
     this.stateNames = stateNames;
+    this.onStateChange = onStateChange;
   }
 
   walk() {
@@ -17,6 +18,7 @@ export class AnimationController {
     this.sprite.showSprite(2);
     this.sprite.play(this.stateNames.walking, {
       run: -1,
+      onPlay: () => this._change(this.stateNames.walking)
     });
   }
 
@@ -24,6 +26,7 @@ export class AnimationController {
     this.bgAnimation.pause();
     this.sprite.play(this.stateNames.waiting, {
       run: -1,
+      onPlay: () => this._change(this.stateNames.waiting)
     });
   }
 
@@ -32,6 +35,7 @@ export class AnimationController {
     this.sprite.play(this.stateNames.falling, {
       run: 1,
       onStop: () => this.respawn(),
+      onPlay: () => this._change(this.stateNames.falling)
     });
   }
 
@@ -39,7 +43,14 @@ export class AnimationController {
     this.sprite.play(this.stateNames.respawn, {
       run: 1,
       onStop: () => this.wait(),
+      onPlay: () => this._change(this.stateNames.respawn)
     });
+  }
+
+  _change(toState) {
+    if (this.onStateChange) {
+      this.onStateChange(toState);
+    }
   }
   
 }

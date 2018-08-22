@@ -46,14 +46,14 @@ export const FRAMES = [
     STATES_NAMES.waiting,
     [
       // standby
+      { sprite: 16, delay: 600 },
+      { sprite: 19, delay: 200 },
       { sprite: 16, delay: 500 },
-      { sprite: 19, delay: 100 },
-      { sprite: 16, delay: 500 },
-      { sprite: 19, delay: 100 },
-      { sprite: 16, delay: 500 },
-      { sprite: 19, delay: 100 },
-      { sprite: 17, delay: 500 },
-      { sprite: 18, delay: 100 },
+      { sprite: 19, delay: 150 },
+      { sprite: 16, delay: 600 },
+      { sprite: 19, delay: 200 },
+      { sprite: 17, delay: 600 },
+      { sprite: 18, delay: 200 },
       { sprite: 17, delay: 500 },
       // tapping
       { sprite: 10, delay: 250 },

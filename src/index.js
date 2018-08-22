@@ -6,17 +6,23 @@ import { AnimationController } from './control';
 
 const CHARACTER_CONTAINER_ID = 'package-guy';
 const BG_CONTAINER_ID = 'bg';
+const COUNTER_ID = 'counter';
 
-const animation = createAnimationControl();
+const counter = createCounter();
+const animation = createAnimationControl(counter);
 bindClick('#btn-wait', () => animation.wait());
 bindClick('#btn-walk', () => animation.walk());
 bindClick('#btn-fall', () => animation.fall());
 animation.wait();
 
-function createAnimationControl() {
+function createAnimationControl(counter) {
   let sprite = createSpriteAnimator();
   const bgControl = createBgControl();
-  return new AnimationController(sprite, bgControl, STATES_NAMES);
+  return new AnimationController(sprite, bgControl, STATES_NAMES, (stateName) => {
+    if (stateName === STATES_NAMES.falling) {
+      counter.increment();
+    }
+  });
 }
 
 function createSpriteAnimator() {
@@ -39,6 +45,18 @@ function createBgControl() {
   return {
     play: () => applyPlayState('running'),
     pause: () => applyPlayState('paused'),
+  };
+}
+
+function createCounter() {
+  const container = document.querySelector(`#${COUNTER_ID}`);
+  let count = 0;
+  const pad = n => n < 10 ? '0' + n : n; 
+  return {
+    increment() {
+      count++;
+      container.textContent = pad(count);
+    }
   };
 }
 

@@ -9,6 +9,16 @@ body {
   --canvas-width: 1920px;
 }
 
+@font-face {
+  font-family: '8-bit pusab';
+  src: url('./assets/8-bit-pusab.ttf');
+}
+
+@font-face {
+  font-family: '8-BIT WONDER';
+  src: url('./assets/8-BIT-WONDER.ttf');
+}
+
 .canvas {
   width: var(--canvas-width);
   height: 1080px;
@@ -27,11 +37,47 @@ body {
   top: 0;
   z-index: 0;
 
-  animation-duration: 60s;
+  animation-duration: 30s;
   animation-delay: 0;
   animation-name: bg-slide;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
+}
+
+.dropcount {
+  background: url('./assets/dropcount.png');
+  width: var(--canvas-width);
+  height: 1080px;
+  color: #fff;
+  position: absolute;
+  left: 0;
+  right: 0;
+}
+
+.dropcount__wrapper {
+  text-align: left;
+  display: flex;
+  width: 560px;
+  float: right;
+  margin-right: 200px;
+  margin-top: 131px;
+  height: 70px;
+}
+
+.dropcount__numbers {
+  color: #fffd38;
+  font-family: '8-bit pusab', monospace;
+  font-size: 38px;
+  width: 95px;
+  text-align: center;
+  line-height: 85px;
+}
+
+.dropcount__text {
+  font-family: '8-BIT WONDER', monospace;
+  font-size: 48px;
+  flex: 1;
+  line-height: 70px;
 }
 
 @keyframes bg-slide {
