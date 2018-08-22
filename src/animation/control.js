@@ -25,8 +25,9 @@ export class AnimationController {
   wait() {
     this.bgAnimation.pause();
     this.sprite.play(this.stateNames.waiting, {
-      run: -1,
-      onPlay: () => this._change(this.stateNames.waiting)
+      run: 1,
+      onPlay: () => this._change(this.stateNames.waiting),
+      onStop: () => this.standby(),
     });
   }
 
@@ -50,7 +51,7 @@ export class AnimationController {
   respawn() {
     this.sprite.play(this.stateNames.respawn, {
       run: 1,
-      onStop: () => this.wait(),
+      onStop: () => this.standby(),
       onPlay: () => this._change(this.stateNames.respawn)
     });
   }

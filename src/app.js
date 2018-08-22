@@ -1,6 +1,8 @@
 import Vue from 'vue';
 import { createAnimationControl, STATES_NAMES } from './animation';
 
+const PATIENCE_TIME = 15000;
+
 new Vue({
   el: '#app',
   data: {
@@ -15,16 +17,11 @@ new Vue({
     },
     animation: null,
     dropCount: 0,
+    waitTimeout: null,
   },
   mounted() {
     this.settings.newHost = this.host;
-    console.log('mounted', this.dropCount, this.host);
-    this.animation = createAnimationControl((state) => {
-      this.currentAnimationState = state;
-      if (state === STATES_NAMES.falling) {
-       this.dropCount = this.dropCount + 1; 
-      }
-    });
+    this.animation = createAnimationControl(state => this.onAnimationStateChange(state));
     global.packageGuy = this.animation;
     this.animation.standby();
   },
@@ -50,7 +47,6 @@ new Vue({
     },
     paddedDropCount() {
       const count = this.dropCount;
-      console.log('dddd', count < 10 ? '0' + count : count);
       return count < 10 ? '0' + count : count;
     },
     connectionClass() {
@@ -71,7 +67,7 @@ new Vue({
         case 'sitting':
           this.animation.wait();
         break;
-        case 'walking':
+        case 'moving':
           this.animation.walk();
         break;
         case 'dropped':
@@ -84,6 +80,21 @@ new Vue({
     }
   },
   methods: {
+    onAnimationStateChange(state) {
+      this.currentAnimationState = state;
+      if (state === STATES_NAMES.falling) {
+        this.dropCount = this.dropCount + 1; 
+      } 
+      if (state === STATES_NAMES.standby) {
+        this.waitTimeout = this.waitTimeout || setTimeout(() => {
+          this.waitTimeout = null;
+          this.animation.wait();
+        }, PATIENCE_TIME);
+      } else if(this.waitTimeout) {
+        clearTimeout(this.waitTimeout);
+        this.waitTimeout = null;
+      }
+    },
     openSettings() {
       this.settings.newHost = this.host;
       this.settings.isOpen = true;
