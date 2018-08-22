@@ -8,21 +8,28 @@ const CHARACTER_CONTAINER_ID = 'package-guy';
 const BG_CONTAINER_ID = 'bg';
 const COUNTER_ID = 'counter';
 
-const counter = createCounter();
-const animation = createAnimationControl(counter);
-bindClick('#btn-wait', () => animation.wait());
-bindClick('#btn-walk', () => animation.walk());
-bindClick('#btn-fall', () => animation.fall());
-animation.wait();
-
-function createAnimationControl(counter) {
-  let sprite = createSpriteAnimator();
-  const bgControl = createBgControl();
-  return new AnimationController(sprite, bgControl, STATES_NAMES, (stateName) => {
+export function demo() {
+  const counter = createCounter();
+  const animation = createAnimationControl((stateName) => {
     if (stateName === STATES_NAMES.falling) {
       counter.increment();
     }
   });
+  bindClick('#btn-wait', () => animation.wait());
+  bindClick('#btn-walk', () => animation.walk());
+  bindClick('#btn-fall', () => animation.fall());
+  animation.wait();
+}
+
+/**
+ * 
+ * @param {*} onStateChange 
+ * @returns {AnimationController} controller
+ */
+export function createAnimationControl(onStateChange) {
+  let sprite = createSpriteAnimator();
+  const bgControl = createBgControl();
+  return new AnimationController(sprite, bgControl, STATES_NAMES, onStateChange);
 }
 
 function createSpriteAnimator() {
@@ -30,7 +37,7 @@ function createSpriteAnimator() {
     url: spritesUrl,
     cols: 4,
     rows: 5,
-  }, `#${CHARACTER_CONTAINER_ID}`, true);
+  }, `#${CHARACTER_CONTAINER_ID}`);
   FRAMES.forEach(([name, frames]) => sprite.addScript(name, frames));
   return sprite;
 }

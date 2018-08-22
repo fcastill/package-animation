@@ -4,10 +4,19 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "parcel index.html"
+    "start": "parcel index.html",
+    "ws:auto": "node ./src/ws/serve-on-connect.js",
+    "demo": "concurrently -k --names static,ws \"npm run start\" \"npm run ws:auto\""
   },
   "dependencies": {
-    "spriteling": "^1.1.0"
+    "bulma": "^0.7.1",
+    "concurrently": "^3.6.1",
+    "spriteling": "^1.1.0",
+    "vue": "^2.5.17",
+    "ws": "^6.0.0"
+  },
+  "alias": {
+    "vue" : "./node_modules/vue/dist/vue.common.js"
   },
   "devDependencies": {
     "parcel-bundler": "^1.9.7"
