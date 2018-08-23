@@ -16,43 +16,48 @@ export class AnimationController {
   walk() {
     this.bgAnimation.play();
     this.sprite.showSprite(2);
-    this.sprite.play(this.stateNames.walking, {
+    const walkingState = this.stateNames.walking;
+    this.sprite.play(walkingState, {
       run: -1,
-      onPlay: () => this._change(this.stateNames.walking)
+      onPlay: () => this._change(walkingState)
     });
   }
 
   wait() {
     this.bgAnimation.pause();
-    this.sprite.play(this.stateNames.waiting, {
+    const waitingState = this.stateNames.waiting;
+    this.sprite.play(waitingState, {
       run: 1,
-      onPlay: () => this._change(this.stateNames.waiting),
+      onPlay: () => this._change(waitingState),
       onStop: () => this.standby(),
     });
   }
 
   standby() {
     this.bgAnimation.pause();
-    this.sprite.play(this.stateNames.standby, {
+    const standbyState = this.stateNames.standby;
+    this.sprite.play(standbyState, {
       run: -1,
-      onPlay: () => this._change(this.stateNames.standby)
+      onPlay: () => this._change(standbyState)
     });
   }
 
   fall() {
     this.bgAnimation.pause();
-    this.sprite.play(this.stateNames.falling, {
+    const fallingState = this.stateNames.falling;
+    this.sprite.play(fallingState, {
       run: 1,
       onStop: () => this.respawn(),
-      onPlay: () => this._change(this.stateNames.falling)
+      onPlay: () => this._change(fallingState)
     });
   }
 
   respawn() {
-    this.sprite.play(this.stateNames.respawn, {
+    const respawnState = this.stateNames.respawn;
+    this.sprite.play(respawnState, {
       run: 1,
       onStop: () => this.standby(),
-      onPlay: () => this._change(this.stateNames.respawn)
+      onPlay: () => this._change(respawnState)
     });
   }
 

@@ -29,7 +29,7 @@ new Vue({
     status() {
       if (this.lastMessage) {
         return Object.keys(this.lastMessage).reduce((mostProbable, action) => {
-          if (this.lastMessage[action] > mostProbable.probability) {
+          if (this.lastMessage[action] > mostProbable.probability && this.lastMessage[action] > 0.50) {
             mostProbable = {
               name: action,
               probability: this.lastMessage[action]
@@ -81,18 +81,32 @@ new Vue({
   },
   methods: {
     onAnimationStateChange(state) {
+      // console.log('s:', state);
+      if (!state) {
+        // console.log('returned', state);
+        return;
+      }
       this.currentAnimationState = state;
       if (state === STATES_NAMES.falling) {
         this.dropCount = this.dropCount + 1; 
-      } 
-      if (state === STATES_NAMES.standby) {
-        this.waitTimeout = this.waitTimeout || setTimeout(() => {
-          this.waitTimeout = null;
-          this.animation.wait();
-        }, PATIENCE_TIME);
-      } else if(this.waitTimeout) {
+      }
+
+      const hasTimeout = this.waitTimeout != null;
+
+      if (state !== STATES_NAMES.standby && hasTimeout) {
+        // console.log('timeoutcleared', state);
         clearTimeout(this.waitTimeout);
         this.waitTimeout = null;
+      }
+
+      const wait = () => {
+        // console.log('cb, timeoutcleared', state);
+        this.waitTimeout = null;
+        this.animation.wait();
+      };
+      if (state === STATES_NAMES.standby && !hasTimeout) {
+        // console.log('newTimeout', state);
+        this.waitTimeout = setTimeout(wait, PATIENCE_TIME);
       }
     },
     openSettings() {
