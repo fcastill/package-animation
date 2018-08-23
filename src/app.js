@@ -64,7 +64,7 @@ new Vue({
         return;
       }
       switch(status.name) {
-        case 'sitting':
+        case 'waiting':
           this.animation.wait();
         break;
         case 'moving':
@@ -82,7 +82,7 @@ new Vue({
   methods: {
     onAnimationStateChange(state) {
       // console.log('s:', state);
-      if (!state) {
+      if (!state || this.connStatus != 'online') {
         // console.log('returned', state);
         return;
       }
