@@ -13,7 +13,7 @@
     "concurrently": "^3.6.1",
     "spriteling": "^1.1.0",
     "vue": "^2.5.17",
-    "ws": "^6.0.0"
+    "ws": "^7.4.6"
   },
   "alias": {
     "vue" : "./node_modules/vue/dist/vue.common.js"
